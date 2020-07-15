@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}可可萝 - 机器人设置{% endblock %}
+{% block pagetitle %}设置主页{% endblock %}
+{% block body%}
+<div id="info-text" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text">选择一种方式来管理你的Hoshino</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="contact-info" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="info-box green-title">
+                    <a href="http://{{ public_address }}:{{port}}/group"><div class="info-title phone-icon">按群管理</div></a>
+                    <div class="info-details">采用分群管理方案</div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="info-box grey-title">
+                    <a href="http://{{ public_address }}:{{port}}/service"><div class="info-title location-icon">按插件管理</div></a>
+                    <div class="info-details">采用分插件管理方案</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}可可萝 - 机器人设置{% endblock %}
+{% block pagetitle %}按群管理{% endblock %}
+{% block body%}
+    <div id="domain-pricing" class="container-fluid">
+        <div class="container">
+            <div class="row domain-lists-holder">
+                <div class="col-sm-4">
+                    <ul class="domain-list">
+                        {% for item in items %}
+                        {% if (loop.index % ((loop.length // 3) + 1)) == 0 %}
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="domain-list">
+                        {% endif %}
+                        <li>
+                            <a href = 'http://{{ public_address }}:{{port}}/group/{{ item["group_id"] }}'><div class="col-xs-6" style="text-align:center">
+
+                                        {{ item['group_id'] }}&emsp;{{ item['group_name'] }}
+
+                                </div></a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

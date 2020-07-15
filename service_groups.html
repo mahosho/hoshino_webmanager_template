@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block title %}可可萝 - 机器人设置{% endblock %}
+{% block pagetitle %}{{ sv_name }}{% endblock %}
+{% block head %}
+    <style>
+        .groupText {
+            display: inline-block;
+            width: 250px;
+            text-align: left;
+            font-size: medium;
+        }
+        .switchButton {
+            display: inline-block;
+            width: 70px;
+            height: 25px;
+        }
+        .on {
+            background-color: lawngreen; 
+        }
+        .off {
+            background-color: gray;
+        }
+    </style>
+{% endblock %}
+{% block body%}
+<div id="domain-pricing" class="container-fluid">
+        <div class="container">
+            <div class="row domain-lists-holder">
+                <div class="col-sm-4">
+                    <ul class="domain-list">
+                        {% for group in groups %}
+                        {% if (loop.index % ((loop.length // 3) + 1)) == 0 %}
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="domain-list">
+                        {% endif %}
+                        <li>
+                            <div class="col-xs-12"> {{ group["group_name"] }}</div>
+                            <div class="col-xs-12"><button id="{{group['group_id']}}" onclick="switcher('{{ group['group_id'] }}')"></button></div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button onclick="onAll()"class="btn btn-default">启用所有</button>
+                    <!-- &emsp; -->
+                    <button onclick="offAll()"class="btn btn-default">禁用所有</button>
+                    <!-- &emsp; -->
+                    <button onclick="save()" class="btn btn-default">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var conf = JSON.parse('{{conf|tojson}}');
+        var sv_name = "{{ sv_name }}";
+        for (gid_str in conf) {
+            if (conf[gid_str][sv_name]) {
+                document.getElementById(gid_str).innerText = '开';
+                document.getElementById(gid_str).className = 'btn btn-success'
+            }
+            else{
+                document.getElementById(gid_str).innerText = '关';
+                document.getElementById(gid_str).className = 'btn btn-danger'
+            }
+        }
+
+        function set_conf(gid_str,is_enable) {
+            conf[gid_str][sv_name] = is_enable;
+            if (is_enable){
+                document.getElementById(gid_str).innerText = '开';
+                document.getElementById(gid_str).className = 'btn btn-success';
+            }
+            else{
+                document.getElementById(gid_str).innerText = '关';
+                document.getElementById(gid_str).className = 'btn btn-danger';
+            }
+        }
+
+        function switcher(gid_str) {
+            var old_status = conf[gid_str][sv_name];
+            var new_status = (old_status + 1)%2;
+            set_conf(gid_str,Boolean(new_status));
+        }
+
+        function onAll() {
+            for (gid_str in conf) {
+                if (conf[gid_str][sv_name] == false) {
+                    conf[gid_str][sv_name] = true;
+                    document.getElementById(gid_str).innerText = '开';
+                    document.getElementById(gid_str).className = 'btn btn-success';
+                }
+            }
+        }
+
+        function offAll() {
+            for (gid_str in conf) {
+                if (conf[gid_str][sv_name] == true) {
+                    conf[gid_str][sv_name] = false;
+                    document.getElementById(gid_str).innerText = '关';
+                    document.getElementById(gid_str).className = 'btn btn-danger';
+                }
+            }
+        }
+
+        function save(){
+            var url = 'http://{{ public_address }}:{{port}}/set';
+            var request = new XMLHttpRequest();
+            request.onload = function() {
+                if (request.status == 200) {
+                    alert('设置成功');
+                }
+                else {
+                    alert('exception');
+                }
+            };
+
+            request.open('POST',url);
+            request.send(JSON.stringify(conf));
+        }
+    </script>
+{% endblock %}
