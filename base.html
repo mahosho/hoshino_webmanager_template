@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="UTF-8">
+    <!-- HTTPS访问请添加去掉此注释
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    -->
     <title>{% block title %}{% endblock %}</title>
     {% block head %}
     {% endblock %}
@@ -10,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/slick.css">
     <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/style.css">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 <body>
     {% include 'nav.html' %}
