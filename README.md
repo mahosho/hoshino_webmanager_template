@@ -1,0 +1,1 @@
+# hoshino_webmanager_template
