@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="https://static.shkong.com/yobot/css/style.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div id="page-head" class="container-fluid inner-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="page-title">{% block pagetitle %}{% endblock %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block body %}
+    {% endblock %}
+    {% include 'footer.html' %}
+    <footer>
+        {% block footer %}{% endblock %}
+    </footer>
+<script src="https://static.shkong.com/yobot/js/paper-full.min.js"></script>
+<script type="text/paperscript" src="https://static.shkong.com/yobot/js/metaball.js" data-paper-canvas="infobg"></script>
+<script src="https://static.shkong.com/yobot/js/jquery.min.js"></script>
+<script src="https://static.shkong.com/yobot/js/bootstrap.min.js"></script>
+<script src="https://static.shkong.com/yobot/js/slick.min.js"></script>
+<script src="https://static.shkong.com/yobot/js/main.js"></script>
+</body>
+{% block scripts %}
+{% endblock %}
+</html>
